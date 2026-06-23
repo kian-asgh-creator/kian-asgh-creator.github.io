@@ -322,7 +322,7 @@
       border-bottom: 1px solid rgba(240,234,214,0.06);
     }
 
-    /* ── WORK / MUSIC ────────────────────────────────── */
+    /* ── FEATURED WORKS ──────────────────────────────── */
     #work {
       background: var(--ink);
       border-top: 1px solid var(--staff);
@@ -407,9 +407,78 @@
       color: var(--ivory);
     }
 
+    /* ── REPERTOIRE ──────────────────────────────────── */
+    #repertoire {
+      background: var(--mid-dark);
+      border-top: 1px solid var(--staff);
+    }
+
+    .rep-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .rep-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid rgba(240,234,214,0.2);
+      background: transparent;
+      color: rgba(240,234,214,0.5);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .rep-tab:hover, .rep-tab.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212,168,67,0.06);
+    }
+
+    .rep-panel {
+      display: none;
+    }
+
+    .rep-panel.active {
+      display: block;
+    }
+
+    .piece-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0 3rem;
+    }
+
+    .piece-list li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(240,234,214,0.07);
+    }
+
+    .piece-composer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .piece-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: rgba(240,234,214,0.85);
+      line-height: 1.3;
+    }
+
     /* ── PHILOSOPHY ──────────────────────────────────── */
     #philosophy {
-      background: var(--mid-dark);
+      background: var(--ink);
       border-top: 1px solid var(--staff);
     }
 
@@ -451,7 +520,7 @@
 
     /* ── CONTACT ─────────────────────────────────────── */
     #contact {
-      background: var(--ink);
+      background: var(--mid-dark);
       border-top: 1px solid var(--staff);
       text-align: center;
     }
@@ -530,6 +599,7 @@
       .about-sidebar { border-left: none; padding-left: 0; border-top: 1px solid rgba(240,234,214,0.12); padding-top: 2rem; }
       .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .videos-grid { grid-template-columns: 1fr; }
+      .piece-list { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -555,10 +625,10 @@
     <a href="#home" class="nav-name">Kian Asgharzadeh</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#work">Work</a></li>
+      <li><a href="#work">Featured</a></li>
+      <li><a href="#repertoire">Repertoire</a></li>
       <li><a href="#philosophy">Process</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="Kian-Asgharzadeh-Resume-2026.pdf" download class="btn btn-outline" style="padding:0.45rem 1.1rem">Résumé ↓</a></li>
     </ul>
   </nav>
 
@@ -592,7 +662,7 @@
       <p class="hero-tagline">Exploring the intersections of classical forms, contemporary sound, and the wordless territories of human experience.</p>
       <div class="hero-ctas">
         <a href="#work" class="btn btn-primary">Listen to the Work</a>
-        <a href="Kian-Asgharzadeh-Resume-2026.pdf" download class="btn btn-outline">Download Résumé</a>
+        <a href="#repertoire" class="btn btn-outline">View Repertoire</a>
       </div>
     </div>
   </section>
@@ -624,7 +694,7 @@
             <ul>
               <li>Gold Prize — Euterpe Music Awards 2024</li>
               <li>Bob Cole Scholarship Recipient</li>
-              <li>Hon. Mention — George & Beverly August Competition</li>
+              <li>Hon. Mention — George &amp; Beverly August Competition</li>
               <li>CSULB Music History Summer Program, Austria</li>
             </ul>
           </div>
@@ -636,17 +706,16 @@
               <li>Spanish — Conversational</li>
             </ul>
           </div>
-          <a href="Kian-Asgharzadeh-Resume-2026.pdf" download class="btn btn-outline" style="display:inline-block; margin-top:1rem">Download Full Résumé ↓</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK -->
+  <!-- FEATURED WORKS -->
   <section id="work">
     <div class="section-inner">
-      <p class="section-label fade-up">Music</p>
-      <h2 class="fade-up">Selected Work</h2>
+      <p class="section-label fade-up">Featured Works</p>
+      <h2 class="fade-up">Featured Works</h2>
 
       <div class="work-categories fade-up">
         <button class="cat-btn active" data-filter="all">All</button>
@@ -708,6 +777,239 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- REPERTOIRE -->
+  <section id="repertoire">
+    <div class="section-inner">
+      <p class="section-label fade-up">Repertoire</p>
+      <h2 class="fade-up">Active Repertoire</h2>
+
+      <div class="rep-tabs fade-up">
+        <button class="rep-tab active" data-tab="classical">Classical</button>
+        <button class="rep-tab" data-tab="latin">Latin &amp; Jazz</button>
+        <button class="rep-tab" data-tab="original">Original Compositions</button>
+      </div>
+
+      <!-- CLASSICAL -->
+      <div class="rep-panel active fade-up" id="rep-classical">
+        <ul class="piece-list">
+          <li>
+            <p class="piece-composer">J.S. Bach</p>
+            <p class="piece-title">Prelude and Fugue in F Minor, BWV 857 (WTK, Book I, No. 12)</p>
+          </li>
+          <li>
+            <p class="piece-composer">J.S. Bach</p>
+            <p class="piece-title">Prelude and Fugue in B-flat Minor, BWV 867 (WTK, Book I, No. 22)</p>
+          </li>
+          <li>
+            <p class="piece-composer">Ludwig van Beethoven</p>
+            <p class="piece-title">Piano Sonata No. 14 in C-sharp Minor, Op. 27 No. 2 ("Moonlight")</p>
+          </li>
+          <li>
+            <p class="piece-composer">Ludwig van Beethoven</p>
+            <p class="piece-title">Piano Sonata No. 24 in F-sharp Major, Op. 78</p>
+          </li>
+          <li>
+            <p class="piece-composer">Wolfgang Amadeus Mozart</p>
+            <p class="piece-title">Piano Sonata No. 8 in A Minor, K. 310</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Ballade No. 1 in G Minor, Op. 23</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Ballade No. 3 in A-flat Major, Op. 47</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Ballade No. 4 in F Minor, Op. 52</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Étude in C Major, Op. 10 No. 1</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Étude in F Minor, Op. 25 No. 2</p>
+          </li>
+          <li>
+            <p class="piece-composer">Frédéric Chopin</p>
+            <p class="piece-title">Étude in C Minor, Op. 25 No. 12 ("Ocean")</p>
+          </li>
+          <li>
+            <p class="piece-composer">Franz Liszt</p>
+            <p class="piece-title">Consolation No. 3 in D-flat Major, S. 172</p>
+          </li>
+          <li>
+            <p class="piece-composer">Franz Liszt</p>
+            <p class="piece-title">Trois Études de Concert No. 3 in D-flat Major, S. 144 ("Un Sospiro")</p>
+          </li>
+          <li>
+            <p class="piece-composer">Maurice Ravel</p>
+            <p class="piece-title">Pavane pour une infante défunte, M. 19</p>
+          </li>
+          <li>
+            <p class="piece-composer">Maurice Ravel</p>
+            <p class="piece-title">Jeux d'eau, M. 30</p>
+          </li>
+          <li>
+            <p class="piece-composer">Alexander Scriabin</p>
+            <p class="piece-title">Étude in D-sharp Minor, Op. 8 No. 12</p>
+          </li>
+          <li>
+            <p class="piece-composer">Alexander Scriabin</p>
+            <p class="piece-title">Piano Sonata No. 2 in G-sharp Minor, Op. 19 ("Sonata-Fantasy")</p>
+          </li>
+          <li>
+            <p class="piece-composer">Nikolai Kapustin</p>
+            <p class="piece-title">Concert Étude Op. 40 No. 1, "Prelude"</p>
+          </li>
+          <li>
+            <p class="piece-composer">Nikolai Kapustin</p>
+            <p class="piece-title">Concert Étude Op. 40 No. 2, "Reverie"</p>
+          </li>
+          <li>
+            <p class="piece-composer">William Bolcom</p>
+            <p class="piece-title">Graceful Ghost Rag</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- LATIN & JAZZ -->
+      <div class="rep-panel" id="rep-latin">
+        <ul class="piece-list">
+          <li>
+            <p class="piece-composer">Juan Gabriel</p>
+            <p class="piece-title">Amor Eterno</p>
+          </li>
+          <li>
+            <p class="piece-composer">Israel "Cachao" López</p>
+            <p class="piece-title">Cachao Son Medley</p>
+          </li>
+          <li>
+            <p class="piece-composer">El Gran Combo de Puerto Rico</p>
+            <p class="piece-title">Calculadora</p>
+          </li>
+          <li>
+            <p class="piece-composer">Oscar D'León</p>
+            <p class="piece-title">Lloraras</p>
+          </li>
+          <li>
+            <p class="piece-composer">Jorge Ben Jor</p>
+            <p class="piece-title">Mas Que Nada</p>
+          </li>
+          <li>
+            <p class="piece-composer">Los Angeles Azules</p>
+            <p class="piece-title">Nunca es Suficiente</p>
+          </li>
+          <li>
+            <p class="piece-composer">Ángel Cabral</p>
+            <p class="piece-title">Que Nadie Sepa Mi Sufrir</p>
+          </li>
+          <li>
+            <p class="piece-composer">Joe Arroyo</p>
+            <p class="piece-title">Rebelión</p>
+          </li>
+          <li>
+            <p class="piece-composer">Grupo Niche</p>
+            <p class="piece-title">Cali</p>
+          </li>
+          <li>
+            <p class="piece-composer">Selena Quintanilla</p>
+            <p class="piece-title">Si Una Vez</p>
+          </li>
+          <li>
+            <p class="piece-composer">Various (Cuban trad.)</p>
+            <p class="piece-title">Buena Vista Social Club Medley</p>
+          </li>
+          <li>
+            <p class="piece-composer">Willie Rosario</p>
+            <p class="piece-title">Idilio</p>
+          </li>
+          <li>
+            <p class="piece-composer">Oscar D'León</p>
+            <p class="piece-title">Baile Inolvidable</p>
+          </li>
+          <li>
+            <p class="piece-composer">Bob Marley &amp; The Wailers</p>
+            <p class="piece-title">Bob Marley Medley</p>
+          </li>
+          <li>
+            <p class="piece-composer">Tito Puente</p>
+            <p class="piece-title">Oye Como Va</p>
+          </li>
+          <li>
+            <p class="piece-composer">Junior Cepeda / Celia Cruz</p>
+            <p class="piece-title">Quimbara</p>
+          </li>
+          <li>
+            <p class="piece-composer">Traditional, Peruvian arr.</p>
+            <p class="piece-title">Woman del Callao</p>
+          </li>
+          <li>
+            <p class="piece-composer">Mario Bauzá</p>
+            <p class="piece-title">Mambo Inn</p>
+          </li>
+          <li>
+            <p class="piece-composer">Israel "Cachao" López</p>
+            <p class="piece-title">Mambo Influenciado</p>
+          </li>
+          <li>
+            <p class="piece-composer">Sonny Rollins</p>
+            <p class="piece-title">Airegin</p>
+          </li>
+          <li>
+            <p class="piece-composer">Joseph Kosma</p>
+            <p class="piece-title">Autumn Leaves</p>
+          </li>
+          <li>
+            <p class="piece-composer">Kenny Dorham</p>
+            <p class="piece-title">Blue Bossa</p>
+          </li>
+          <li>
+            <p class="piece-composer">Charlie Parker</p>
+            <p class="piece-title">Blues for Alice</p>
+          </li>
+          <li>
+            <p class="piece-composer">Paul Desmond</p>
+            <p class="piece-title">Take Five</p>
+          </li>
+          <li>
+            <p class="piece-composer">Stevie Wonder</p>
+            <p class="piece-title">Isn't She Lovely</p>
+          </li>
+          <li>
+            <p class="piece-composer">Bob Thiele &amp; George David Weiss</p>
+            <p class="piece-title">What a Wonderful World</p>
+          </li>
+          <li>
+            <p class="piece-composer">John Klenner &amp; Sam Lewis</p>
+            <p class="piece-title">Just Friends</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ORIGINAL COMPOSITIONS -->
+      <div class="rep-panel" id="rep-original">
+        <ul class="piece-list">
+          <li>
+            <p class="piece-composer">Kian Asgharzadeh</p>
+            <p class="piece-title">Tableau No. 1</p>
+          </li>
+          <li>
+            <p class="piece-composer">Kian Asgharzadeh</p>
+            <p class="piece-title">Tableau No. 2</p>
+          </li>
+          <li>
+            <p class="piece-composer">Kian Asgharzadeh</p>
+            <p class="piece-title">Vignette No. 1</p>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -778,6 +1080,14 @@
           <span>YouTube</span>
         </a>
 
+        <!-- Substack -->
+        <a href="https://substack.com/@kianwritesbutnotwell" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5h18M3 9h18M3 13h10M3 17l5 4 5-4"/>
+          </svg>
+          <span>Substack</span>
+        </a>
+
       </div>
 
       <div class="footer-rule"></div>
@@ -817,6 +1127,19 @@
             card.style.display = 'none';
           }
         });
+      });
+    });
+
+    // Repertoire tabs
+    const repTabs = document.querySelectorAll('.rep-tab');
+    const repPanels = document.querySelectorAll('.rep-panel');
+
+    repTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        repTabs.forEach(t => t.classList.remove('active'));
+        repPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('rep-' + tab.dataset.tab).classList.add('active');
       });
     });
 
