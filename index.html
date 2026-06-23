@@ -454,7 +454,7 @@
     }
 
     .piece-list li {
-      padding: 0.9rem 0;
+      padding: 0.9rem 0.75rem;
       border-bottom: 1px solid rgba(240,234,214,0.07);
       break-inside: avoid;
       transition: background 0.2s;
@@ -493,24 +493,45 @@
 
     .rep-search-wrap {
       margin-left: auto;
-      display: flex;
-      align-items: center;
     }
 
-    .rep-search-btn {
-      padding: 0.5rem;
+    .rep-search-toggle {
+      display: flex;
+      align-items: center;
       border: 1px solid rgba(240,234,214,0.2);
       background: transparent;
-      color: rgba(240,234,214,0.5);
-      cursor: pointer;
+      overflow: hidden;
+      width: 34px;
+      transition: width 0.35s ease, border-color 0.2s, background 0.2s;
+    }
+
+    .rep-search-wrap.expanded .rep-search-toggle {
+      width: 230px;
+      border-color: rgba(240,234,214,0.3);
+    }
+
+    .rep-search-wrap.expanded .rep-search-toggle:focus-within {
+      border-color: var(--gold);
+    }
+
+    .rep-search-icon {
+      flex-shrink: 0;
+      width: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      padding: 0.5rem;
+      color: rgba(240,234,214,0.5);
+      cursor: pointer;
+      transition: color 0.2s;
     }
 
-    .rep-search-btn svg {
+    .rep-search-toggle:hover .rep-search-icon,
+    .rep-search-wrap.expanded .rep-search-icon {
+      color: var(--gold);
+    }
+
+    .rep-search-icon svg {
       width: 14px;
       height: 14px;
       stroke: currentColor;
@@ -519,50 +540,36 @@
       stroke-linecap: round;
     }
 
-    .rep-search-btn:hover,
-    .rep-search-wrap.expanded .rep-search-btn {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(212,168,67,0.06);
-    }
-
     .rep-search {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      width: 0;
-      padding: 0;
-      border: 1px solid transparent;
-      border-right: none;
+      letter-spacing: 0.1em;
+      flex: 1;
+      padding: 0.5rem 0.5rem 0.5rem 0;
+      border: none;
       background: transparent;
-      color: rgba(240,234,214,0.75);
+      color: var(--ivory);
       outline: none;
-      overflow: hidden;
-      transition: width 0.35s ease, padding 0.35s ease, border-color 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s 0.15s;
       -webkit-appearance: none;
       appearance: none;
     }
 
     .rep-search-wrap.expanded .rep-search {
-      width: 200px;
-      padding: 0.5rem 1rem;
-      border-color: rgba(240,234,214,0.2);
-    }
-
-    .rep-search-wrap.expanded .rep-search:focus {
-      border-color: var(--gold);
-      color: var(--ivory);
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .rep-search::placeholder {
       color: rgba(240,234,214,0.3);
-      letter-spacing: 0.08em;
     }
 
     .rep-search::-webkit-search-cancel-button {
       filter: invert(1) opacity(0.4);
       cursor: pointer;
+      margin-right: 0.3rem;
     }
 
     .piece-list li.has-link {
@@ -714,7 +721,7 @@
       .videos-grid { grid-template-columns: 1fr; }
       .piece-list { columns: 1; }
       .rep-search-wrap { margin-left: 0; }
-      .rep-search-wrap.expanded .rep-search { width: 150px; }
+      .rep-search-wrap.expanded .rep-search-toggle { width: 180px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -906,10 +913,12 @@
         <button class="rep-tab" data-tab="latin">Latin &amp; Jazz</button>
         <button class="rep-tab" data-tab="original">Original Compositions</button>
         <div class="rep-search-wrap">
-          <input class="rep-search" type="search" placeholder="Search repertoire…" autocomplete="off" spellcheck="false" />
-          <button class="rep-search-btn" aria-label="Search repertoire">
-            <svg viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10" y1="10" x2="14" y2="14"/></svg>
-          </button>
+          <div class="rep-search-toggle">
+            <span class="rep-search-icon" role="button" tabindex="0" aria-label="Search repertoire">
+              <svg viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10" y1="10" x2="14" y2="14"/></svg>
+            </span>
+            <input class="rep-search" type="search" placeholder="Search repertoire…" autocomplete="off" spellcheck="false" />
+          </div>
         </div>
       </div>
 
@@ -1305,7 +1314,7 @@
     const repTabs = document.querySelectorAll('.rep-tab');
     const repPanels = document.querySelectorAll('.rep-panel');
     const repSearchWrap = document.querySelector('.rep-search-wrap');
-    const repSearchBtn = document.querySelector('.rep-search-btn');
+    const repSearchIcon = document.querySelector('.rep-search-icon');
     const repSearch = document.querySelector('.rep-search');
 
     function clearSearch() {
@@ -1325,7 +1334,7 @@
       });
     });
 
-    repSearchBtn.addEventListener('click', () => {
+    repSearchIcon.addEventListener('click', () => {
       if (repSearchWrap.classList.contains('expanded')) {
         clearSearch();
       } else {
