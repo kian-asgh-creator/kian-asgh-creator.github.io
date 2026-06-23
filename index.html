@@ -449,14 +449,14 @@
 
     .piece-list {
       list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 0 3rem;
+      columns: 3;
+      column-gap: 3rem;
     }
 
     .piece-list li {
       padding: 0.9rem 0;
       border-bottom: 1px solid rgba(240,234,214,0.07);
+      break-inside: avoid;
     }
 
     .piece-composer {
@@ -609,7 +609,7 @@
       .about-sidebar { border-left: none; padding-left: 0; border-top: 1px solid rgba(240,234,214,0.12); padding-top: 2rem; }
       .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .videos-grid { grid-template-columns: 1fr; }
-      .piece-list { grid-template-columns: 1fr; }
+      .piece-list { columns: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
