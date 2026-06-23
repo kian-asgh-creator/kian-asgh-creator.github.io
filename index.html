@@ -457,6 +457,11 @@
       padding: 0.9rem 0;
       border-bottom: 1px solid rgba(240,234,214,0.07);
       break-inside: avoid;
+      transition: background 0.2s;
+    }
+
+    .piece-list li:hover {
+      background: rgba(201,130,107,0.08);
     }
 
     .piece-composer {
@@ -492,32 +497,67 @@
       align-items: center;
     }
 
+    .rep-search-btn {
+      padding: 0.5rem;
+      border: 1px solid rgba(240,234,214,0.2);
+      background: transparent;
+      color: rgba(240,234,214,0.5);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .rep-search-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .rep-search-btn:hover,
+    .rep-search-wrap.expanded .rep-search-btn {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212,168,67,0.06);
+    }
+
     .rep-search {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.68rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 0.5rem 1.4rem;
-      border: 1px solid rgba(240,234,214,0.2);
+      width: 0;
+      padding: 0;
+      border: 1px solid transparent;
+      border-right: none;
       background: transparent;
       color: rgba(240,234,214,0.75);
       outline: none;
-      width: 180px;
-      transition: border-color 0.2s, color 0.2s, width 0.3s;
+      overflow: hidden;
+      transition: width 0.35s ease, padding 0.35s ease, border-color 0.2s;
       -webkit-appearance: none;
       appearance: none;
     }
 
-    .rep-search::placeholder {
-      color: rgba(240,234,214,0.3);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .rep-search-wrap.expanded .rep-search {
+      width: 200px;
+      padding: 0.5rem 1rem;
+      border-color: rgba(240,234,214,0.2);
     }
 
-    .rep-search:focus {
+    .rep-search-wrap.expanded .rep-search:focus {
       border-color: var(--gold);
       color: var(--ivory);
-      width: 220px;
+    }
+
+    .rep-search::placeholder {
+      color: rgba(240,234,214,0.3);
+      letter-spacing: 0.08em;
     }
 
     .rep-search::-webkit-search-cancel-button {
@@ -527,12 +567,6 @@
 
     .piece-list li.has-link {
       cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-
-    .piece-list li.has-link:hover {
-      background: rgba(201,130,107,0.08);
-      box-shadow: inset 2px 0 0 var(--rose);
     }
 
     .play-badge {
@@ -679,9 +713,8 @@
       .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .videos-grid { grid-template-columns: 1fr; }
       .piece-list { columns: 1; }
-      .rep-search-wrap { margin-left: 0; width: 100%; }
-      .rep-search { width: 100%; }
-      .rep-search:focus { width: 100%; }
+      .rep-search-wrap { margin-left: 0; }
+      .rep-search-wrap.expanded .rep-search { width: 150px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -873,7 +906,10 @@
         <button class="rep-tab" data-tab="latin">Latin &amp; Jazz</button>
         <button class="rep-tab" data-tab="original">Original Compositions</button>
         <div class="rep-search-wrap">
-          <input class="rep-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false" />
+          <input class="rep-search" type="search" placeholder="Search repertoire…" autocomplete="off" spellcheck="false" />
+          <button class="rep-search-btn" aria-label="Search repertoire">
+            <svg viewBox="0 0 16 16" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10" y1="10" x2="14" y2="14"/></svg>
+          </button>
         </div>
       </div>
 
@@ -1265,12 +1301,23 @@
       });
     });
 
-    // Repertoire tabs
+    // Repertoire tabs + search
     const repTabs = document.querySelectorAll('.rep-tab');
     const repPanels = document.querySelectorAll('.rep-panel');
+    const repSearchWrap = document.querySelector('.rep-search-wrap');
+    const repSearchBtn = document.querySelector('.rep-search-btn');
+    const repSearch = document.querySelector('.rep-search');
+
+    function clearSearch() {
+      repSearch.value = '';
+      repPanels.forEach(p => { p.style.display = ''; });
+      document.querySelectorAll('.piece-list li').forEach(li => { li.style.display = ''; });
+      repSearchWrap.classList.remove('expanded');
+    }
 
     repTabs.forEach(tab => {
       tab.addEventListener('click', () => {
+        clearSearch();
         repTabs.forEach(t => t.classList.remove('active'));
         repPanels.forEach(p => p.classList.remove('active'));
         tab.classList.add('active');
@@ -1278,14 +1325,36 @@
       });
     });
 
-    // Repertoire search
-    const repSearch = document.querySelector('.rep-search');
+    repSearchBtn.addEventListener('click', () => {
+      if (repSearchWrap.classList.contains('expanded')) {
+        clearSearch();
+      } else {
+        repSearchWrap.classList.add('expanded');
+        requestAnimationFrame(() => repSearch.focus());
+      }
+    });
+
+    repSearch.addEventListener('blur', () => {
+      if (!repSearch.value) {
+        repSearchWrap.classList.remove('expanded');
+      }
+    });
+
+    repSearch.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { clearSearch(); }
+    });
+
     repSearch.addEventListener('input', () => {
       const q = repSearch.value.toLowerCase().trim();
-      document.querySelectorAll('.piece-list li').forEach(li => {
-        const match = !q || li.textContent.toLowerCase().includes(q);
-        li.style.display = match ? '' : 'none';
-      });
+      if (q) {
+        repPanels.forEach(p => { p.style.display = 'block'; });
+        document.querySelectorAll('.piece-list li').forEach(li => {
+          li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      } else {
+        repPanels.forEach(p => { p.style.display = ''; });
+        document.querySelectorAll('.piece-list li').forEach(li => { li.style.display = ''; });
+      }
     });
 
     // Click-to-navigate for linked pieces
