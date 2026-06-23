@@ -486,6 +486,75 @@
       opacity: 0.75;
     }
 
+    .rep-search-wrap {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .rep-search {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid rgba(240,234,214,0.2);
+      background: transparent;
+      color: rgba(240,234,214,0.75);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.2s, color 0.2s, width 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .rep-search::placeholder {
+      color: rgba(240,234,214,0.3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .rep-search:focus {
+      border-color: var(--gold);
+      color: var(--ivory);
+      width: 220px;
+    }
+
+    .rep-search::-webkit-search-cancel-button {
+      filter: invert(1) opacity(0.4);
+      cursor: pointer;
+    }
+
+    .piece-list li.has-link {
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .piece-list li.has-link:hover {
+      background: rgba(201,130,107,0.08);
+      box-shadow: inset 2px 0 0 var(--rose);
+    }
+
+    .play-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 0.45rem;
+      vertical-align: middle;
+      color: var(--rose);
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .piece-list li.has-link:hover .play-badge {
+      opacity: 1;
+    }
+
+    .play-badge svg {
+      width: 9px;
+      height: 9px;
+      fill: currentColor;
+    }
+
     /* ── PHILOSOPHY ──────────────────────────────────── */
     #philosophy {
       background: var(--ink);
@@ -610,6 +679,9 @@
       .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .videos-grid { grid-template-columns: 1fr; }
       .piece-list { columns: 1; }
+      .rep-search-wrap { margin-left: 0; width: 100%; }
+      .rep-search { width: 100%; }
+      .rep-search:focus { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -800,6 +872,9 @@
         <button class="rep-tab active" data-tab="classical">Classical</button>
         <button class="rep-tab" data-tab="latin">Latin &amp; Jazz</button>
         <button class="rep-tab" data-tab="original">Original Compositions</button>
+        <div class="rep-search-wrap">
+          <input class="rep-search" type="search" placeholder="Search…" autocomplete="off" spellcheck="false" />
+        </div>
       </div>
 
       <!-- CLASSICAL -->
@@ -835,9 +910,9 @@
             <p class="piece-title">Étude in C Major, Op. 10 No. 1</p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
-          <li>
+          <li class="has-link" data-href="https://www.youtube.com/watch?v=-p_qFqwU2hY">
             <p class="piece-composer">Frédéric Chopin</p>
-            <p class="piece-title">Ballade No. 1 in G Minor, Op. 23</p>
+            <p class="piece-title">Ballade No. 1 in G Minor, Op. 23 <span class="play-badge" aria-label="Watch recording"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></span></p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
           <li>
@@ -895,9 +970,9 @@
             <p class="piece-title">Concert Étude Op. 40 No. 1, "Prelude"</p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
-          <li>
+          <li class="has-link" data-href="https://www.youtube.com/watch?v=8tmLyVkCfiU">
             <p class="piece-composer">Nikolai Kapustin</p>
-            <p class="piece-title">Concert Étude Op. 40 No. 2, "Reverie"</p>
+            <p class="piece-title">Concert Étude Op. 40 No. 2, "Reverie" <span class="play-badge" aria-label="Watch recording"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></span></p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
           <li>
@@ -1052,9 +1127,9 @@
       <!-- ORIGINAL COMPOSITIONS -->
       <div class="rep-panel" id="rep-original">
         <ul class="piece-list">
-          <li>
+          <li class="has-link" data-href="https://www.youtube.com/watch?v=QFVUM3DdN6g">
             <p class="piece-composer">Kian Asgharzadeh</p>
-            <p class="piece-title">Tableau No. 1</p>
+            <p class="piece-title">Tableau No. 1 <span class="play-badge" aria-label="Watch recording"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></span></p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
           <li>
@@ -1062,9 +1137,9 @@
             <p class="piece-title">Tableau No. 2</p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
-          <li>
+          <li class="has-link" data-href="https://www.youtube.com/watch?v=CSKkhAQonzY">
             <p class="piece-composer">Kian Asgharzadeh</p>
-            <p class="piece-title">Vignette No. 1</p>
+            <p class="piece-title">Vignette No. 1 <span class="play-badge" aria-label="Watch recording"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></span></p>
             <p class="piece-instrumentation">Solo Piano</p>
           </li>
         </ul>
@@ -1200,6 +1275,23 @@
         repPanels.forEach(p => p.classList.remove('active'));
         tab.classList.add('active');
         document.getElementById('rep-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Repertoire search
+    const repSearch = document.querySelector('.rep-search');
+    repSearch.addEventListener('input', () => {
+      const q = repSearch.value.toLowerCase().trim();
+      document.querySelectorAll('.piece-list li').forEach(li => {
+        const match = !q || li.textContent.toLowerCase().includes(q);
+        li.style.display = match ? '' : 'none';
+      });
+    });
+
+    // Click-to-navigate for linked pieces
+    document.querySelectorAll('.piece-list li.has-link').forEach(li => {
+      li.addEventListener('click', () => {
+        window.open(li.dataset.href, '_blank', 'noopener');
       });
     });
 
