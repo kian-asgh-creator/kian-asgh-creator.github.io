@@ -503,12 +503,13 @@
       background: transparent;
       overflow: hidden;
       width: 34px;
-      transition: width 0.35s ease, border-color 0.2s, background 0.2s;
+      transition: width 0.35s ease 0.12s, border-color 0.2s, background 0.2s;
     }
 
     .rep-search-wrap.expanded .rep-search-toggle {
       width: 230px;
       border-color: rgba(240,234,214,0.3);
+      transition: width 0.35s ease 0s, border-color 0.2s, background 0.2s;
     }
 
     .rep-search-wrap.expanded .rep-search-toggle:focus-within {
@@ -556,7 +557,7 @@
       outline: none;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.15s 0.15s;
+      transition: opacity 0.1s 0s;
       -webkit-appearance: none;
       appearance: none;
     }
@@ -564,6 +565,7 @@
     .rep-search-wrap.expanded .rep-search {
       opacity: 1;
       pointer-events: auto;
+      transition: opacity 0.2s 0.25s;
     }
 
     .rep-search::placeholder {
