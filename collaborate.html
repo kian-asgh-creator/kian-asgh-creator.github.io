@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborate — Kian Asgharzadeh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .collab-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,234,214,0.5);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .collab-back:hover { color: var(--rose); }
+    .collab-back svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    #collab-hero {
+      padding-top: 10rem;
+      text-align: center;
+    }
+    #collab-hero .contact-sub { max-width: 560px; margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html#home" class="nav-name">Kian Asgharzadeh</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Featured</a></li>
+      <li><a href="index.html#repertoire">Repertoire</a></li>
+      <li><a href="index.html#philosophy">Process</a></li>
+      <li><a href="collaborate.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- COLLABORATE -->
+  <section id="collab-hero">
+    <div class="section-inner">
+      <a href="index.html" class="collab-back">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+        Back to Home
+      </a>
+
+      <p class="section-label fade-up" style="justify-content:center">Get in Touch</p>
+      <h2 class="fade-up">Let's make<br>something together</h2>
+      <p class="contact-sub fade-up">Open to collaborations in film, dance, and multimedia.</p>
+
+      <div class="inquiry-wrap fade-up">
+        <p class="inquiry-label">Collaboration Inquiry</p>
+        <p class="inquiry-intro">Working on a project and think there's a fit? Share the details below and I'll follow up.</p>
+
+        <form class="inquiry-form" id="inquiry-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inq-name">Name</label>
+              <input type="text" id="inq-name" name="name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="inq-email">Email</label>
+              <input type="email" id="inq-email" name="email" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inq-phone">Phone (optional)</label>
+              <input type="tel" id="inq-phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="inq-comm">Preferred Communication Method</label>
+              <select id="inq-comm" name="comm" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Email">Email</option>
+                <option value="Phone">Phone</option>
+                <option value="Video Call">Video Call</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inq-type">Type of Collaboration</label>
+              <select id="inq-type" name="type" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Film Score">Film Score</option>
+                <option value="Dance / Choreography">Dance / Choreography</option>
+                <option value="Teaching / Lessons">Teaching / Lessons</option>
+                <option value="Multimedia / Installation">Multimedia / Installation</option>
+                <option value="Performance Engagement">Performance Engagement</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inq-timeline">Project Timeline</label>
+              <select id="inq-timeline" name="timeline" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="ASAP / Within 1 month">ASAP / Within 1 month</option>
+                <option value="1–3 months">1–3 months</option>
+                <option value="3–6 months">3–6 months</option>
+                <option value="6+ months">6+ months</option>
+                <option value="Flexible / Ongoing">Flexible / Ongoing</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inq-budget">Budget Range</label>
+              <select id="inq-budget" name="budget" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Under $500">Under $500</option>
+                <option value="$500–$2,000">$500–$2,000</option>
+                <option value="$2,000–$5,000">$2,000–$5,000</option>
+                <option value="$5,000–$10,000">$5,000–$10,000</option>
+                <option value="$10,000+">$10,000+</option>
+                <option value="Prefer to discuss">Prefer to discuss</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inq-portfolio">Link to Your Work (optional)</label>
+              <input type="url" id="inq-portfolio" name="portfolio" placeholder="https://…" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inq-project">Tell Me About Your Project &amp; Your Work</label>
+            <textarea id="inq-project" name="project" placeholder="What's the project, who's involved, and what would you like a pianist/composer to bring to it?" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Inquiry</button>
+          <p class="inquiry-note" id="inquiry-note" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <p class="contact-divider fade-up">Or reach out directly</p>
+
+      <div class="contact-links fade-up">
+
+        <!-- Email -->
+        <a href="mailto:kian-asgh@berkeley.edu" class="contact-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+          <span>Email</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/kian-asgharzadeh-5510a4224/" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2"/>
+            <line x1="8" y1="11" x2="8" y2="16"/>
+            <line x1="8" y1="8" x2="8" y2="8.5"/>
+            <line x1="12" y1="16" x2="12" y2="11"/>
+            <path d="M12 13.5a2.5 2.5 0 0 1 5 0V16"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@kians-world-and-more" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+          </svg>
+          <span>YouTube</span>
+        </a>
+
+        <!-- Substack -->
+        <a href="https://substack.com/@kianwritesbutnotwell" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5h18M3 9h18M3 13h10M3 17l5 4 5-4"/>
+          </svg>
+          <span>Substack</span>
+        </a>
+
+      </div>
+
+      <div class="footer-rule"></div>
+      <p class="footer-sig">Kian Asgharzadeh — Bay Area / Los Angeles</p>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;color:rgba(240,234,214,0.15);margin-top:0.4rem;">
+        © 2026
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // Scroll fade-in observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Collaboration inquiry form → pre-filled email
+    const inquiryForm = document.getElementById('inquiry-form');
+    const inquiryNote = document.getElementById('inquiry-note');
+
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = new FormData(inquiryForm);
+      const name = data.get('name').trim();
+      const email = data.get('email').trim();
+      const phone = data.get('phone').trim();
+      const comm = data.get('comm');
+      const type = data.get('type');
+      const timeline = data.get('timeline');
+      const budget = data.get('budget');
+      const portfolio = data.get('portfolio').trim();
+      const project = data.get('project').trim();
+
+      const subject = `Collaboration Inquiry — ${type}`;
+      const bodyLines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone ? `Phone: ${phone}` : null,
+        `Preferred Communication Method: ${comm}`,
+        `Type of Collaboration: ${type}`,
+        `Project Timeline: ${timeline}`,
+        `Budget Range: ${budget}`,
+        portfolio ? `Link to Their Work: ${portfolio}` : null,
+        '',
+        'About the project & their work:',
+        project
+      ].filter(line => line !== null).join('\n');
+
+      const mailto = `mailto:kian-asgh@berkeley.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines)}`;
+      window.location.href = mailto;
+
+      inquiryNote.textContent = 'Opening your email client to send this inquiry…';
+    });
+
+    // Nav shrink on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.padding = '0.9rem 3rem';
+      } else {
+        nav.style.padding = '1.4rem 3rem';
+      }
+    });
+  </script>
+</body>
+</html>
